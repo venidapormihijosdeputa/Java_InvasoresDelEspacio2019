@@ -318,7 +318,7 @@ public class VentanaJuego extends javax.swing.JFrame {
                 miNave.setPulsadoDerecha(true);
                 break;
             case KeyEvent.VK_SPACE:
-                reproduce("/sonidos/.venid.wav");
+                reproduce("/sonidos/venid.wav");
                 miDisparo.posicionaDisparo(miNave);
                 miDisparo.disparado = true;
                 break;
