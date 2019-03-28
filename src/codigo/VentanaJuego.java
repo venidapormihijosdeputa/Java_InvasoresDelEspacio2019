@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 
 /**
@@ -92,6 +94,18 @@ public class VentanaJuego extends javax.swing.JFrame {
         creaFilaDeMarcianos(5, 0, 2);
         creaFilaDeMarcianos(6, 0, 2);
         creaFilaDeMarcianos(7, 0, 2);        
+    }
+    
+    public void reproduce(String cancion){
+        try{
+            Clip clip= AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(getClass().getResource(cancion)));
+            clip.loop(0);
+            
+        }
+        catch (Exception e){
+            
+        }
     }
   
     
@@ -193,10 +207,12 @@ public class VentanaJuego extends javax.swing.JFrame {
                                                 listaMarcianos[i][j].imagen1.getWidth(null),
                                                 listaMarcianos[i][j].imagen1.getHeight(null)
                                                 );
+                    
                     if (rectanguloDisparo.intersects(rectanguloMarciano)){
                         listaMarcianos[i][j].vivo = false;
                         miDisparo.posicionaDisparo(miNave);
                         miDisparo.y = 1000;
+                        reproduce("/sonidos/.venid.wav");
                         miDisparo.disparado = false;
                     }
                 }
@@ -302,6 +318,7 @@ public class VentanaJuego extends javax.swing.JFrame {
                 miNave.setPulsadoDerecha(true);
                 break;
             case KeyEvent.VK_SPACE:
+                reproduce("/sonidos/.venid.wav");
                 miDisparo.posicionaDisparo(miNave);
                 miDisparo.disparado = true;
                 break;
